@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ZipCodeInput from './components/ZipCodeInput';
 import ShelterList from './components/ShelterList';
 import './App.css';
-import { fetchShelters } from './services/api';
+import { fetchSheltersByZipCode } from './services/api';
 
 function App() {
   const [zipCode, setZipCode] = useState('');
@@ -10,7 +10,7 @@ function App() {
 
   const handleZipCodeSubmit = async (code) => {
     setZipCode(code);
-    const fetchedShelters = await fetchShelters(code);
+    const fetchedShelters = await fetchSheltersByZipCode(code);
     setShelters(fetchedShelters);
   };
 
