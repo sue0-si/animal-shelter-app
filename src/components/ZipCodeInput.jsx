@@ -18,7 +18,7 @@ function ZipCodeInput({ onSubmit }) {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={zipCode}
+        value={zipCode.trim()}
         onChange={handleInputChange}
         placeholder="Enter Zip Code"
         required

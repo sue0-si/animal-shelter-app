@@ -1,6 +1,11 @@
 import React from 'react';
 
+
 const ShelterList = ({ shelters }) => {
+  const formatAddress = (address) => {
+    const nullCheck = (value) => value == null ? "" : (value + ",");
+    return `${nullCheck(address.address1)} ${nullCheck(address.address2)} ${nullCheck(address.city)} ${nullCheck(address.state)} ${nullCheck(address.postcode).replace(',', '')}`;
+  };  
   return (
     <div>
       <h2>Available Animal Adoption Shelters</h2>
@@ -9,8 +14,9 @@ const ShelterList = ({ shelters }) => {
           {shelters.map((shelter, index) => (
             <li key={index}>
               <h3>{shelter.name}</h3>
-              <p>{shelter.address}</p>
+              <p>{formatAddress(shelter.address)}</p>
               <p>{shelter.phone}</p>
+              <p>{shelter.email}</p>
             </li>
           ))}
         </ul>
@@ -20,5 +26,6 @@ const ShelterList = ({ shelters }) => {
     </div>
   );
 };
+
 
 export default ShelterList;
