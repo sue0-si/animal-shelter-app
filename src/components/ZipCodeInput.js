@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ZipCodeInput({ onSearch }) {
+function ZipCodeInput({ onSubmit }) {
   const [zipCode, setZipCode] = useState('');
 
   const handleInputChange = (event) => {
@@ -10,7 +10,7 @@ function ZipCodeInput({ onSearch }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (zipCode) {
-      onSearch(zipCode);
+      onSubmit(zipCode);
     }
   };
 

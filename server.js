@@ -1,7 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
+const API_BASE_URL = 'https://api.petfinder.com/v2/animal';
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -10,7 +11,11 @@ app.use(express.json());
 app.get('/api/shelters', async (req, res) => {
   const { zipCode } = req.query;
   try {
-    const response = await axios.get(`https://api.example.com/shelters?zipCode=${zipCode}`);
+    const response = await axios.get(`${API_BASE_URL}`, {
+          params: {
+            location: zipCode
+          },
+    });
     res.json(response.data);
   } catch (error) {
     console.error('Error fetching shelters:', error);
