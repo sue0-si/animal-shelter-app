@@ -1,6 +1,19 @@
 import React from 'react';
+import styled from 'styled-components'
 
-
+export const DivBox = styled.div`
+  border-radius: 3px;
+  border: 2px solid #282c34;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 50%;
+  align-self: center;
+`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const ShelterList = ({ shelters }) => {
   const formatAddress = (address) => {
@@ -14,16 +27,16 @@ const ShelterList = ({ shelters }) => {
     <div>
       <h2>Available Animal Adoption Shelters</h2>
       {shelters.length > 0 ? (
-        <div>
+        <Container>
           {shelters.map((shelter, index) => (
-            <div key={index}>
+            <DivBox key={index}>
               <h3>{shelter.name}</h3>
               <p>{formatAddress(shelter.address)}</p>
               <p>{shelter.phone}</p>
               <EmailLink email={shelter.email}/>
-            </div>
+            </DivBox>
           ))}
-        </div>
+        </Container>
       ) : (
         <p>No shelters found for the provided zip code.</p>
       )}
