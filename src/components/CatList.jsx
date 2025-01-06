@@ -1,4 +1,5 @@
 import React from 'react';
+import default_cat_image from '../default_cat_image.jpg';
 
 const CatList = ({ cats }) => {
     // console.log("cats in catlist.jsx", cats);
@@ -11,7 +12,9 @@ const CatList = ({ cats }) => {
     else return <div style={styles.grid}>
             {cats.map((cat) => (
                 <a key={cat.id} href={cat.url} style={styles.card}>
-                    <img src={cat.photos[0]?.medium} alt={cat.name} style={styles.image} />
+                    <img src={
+                        (cat.photos.length == 0 || cat.photos[0]?.medium == null) ? default_cat_image : cat.photos[0].medium
+                    } alt={cat.name} style={styles.image} />
                     <div style={styles.details}>
                         <h3>{cat.name}</h3>
                         <p>Age: {cat.age}</p>
