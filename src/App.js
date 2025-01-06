@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import ZipCodeInput from './components/ZipCodeInput';
 import ShelterList from './components/ShelterList';
+import CatList from "./components/CatList";
 import './App.css';
 import { fetchByZipCode } from './services/api';
 import Filters from './components/Filters';
 
 function App() {
-  const [zipCode, setZipCode] = useState('');
-  const [shelters, setShelters] = useState([]);
+    const [zipCode, setZipCode] = useState("");
+    const [shelters, setShelters] = useState([]);
+    const [cats, setCats] = useState([]);
   const [distance, setDistance] = useState('');
 
-  const handleZipCodeSubmit = async (code) => {
-    setZipCode(code);
-    const fetchedShelters = await fetchByZipCode(code, 'organizations', distance);
+    const handleZipCodeSubmit = async (code) => {
+        setZipCode(code);
+        const fetchedShelters = await fetchByZipCode(code, "organizations", distance);
     console.log('fetched shelters:', fetchedShelters);
-    localStorage.setItem('shelters', JSON.stringify(fetchedShelters.organizations));
-    setShelters(fetchedShelters);
+        console.log(fetchedShelters);
+        setShelters(fetchedShelters);
+        const fetchedCats = await fetchByZipCode(code, "animals");
+        setCats(fetchedCats.animals);
   };
 
   const handleDistanceChange = async (dist) => {
@@ -24,18 +28,25 @@ function App() {
     //   const fetchedShelters = await fetchByZipCode(zipCode, dist);
     //   setShelters(fetchedShelters);
     // }
-  };
+    };
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Animal Adoption Shelters</h1>
+    return (
+        <div className="App">
+            <header className="App-header">
+                <h1>Animal Adoption Shelters</h1>
         <Filters onFilterChange={handleDistanceChange} />
-        <ZipCodeInput onSubmit={handleZipCodeSubmit} />
-      </header>
-      <ShelterList shelters={shelters} />
-    </div>
-  );
+                <ZipCodeInput onSubmit={handleZipCodeSubmit} />
+            </header>
+            <div className="container">
+                <div className="box">
+                    <ShelterList shelters={shelters} />
+                </div>
+                <div className="box">
+                    <CatList cats={cats}/>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;

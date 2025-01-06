@@ -26,7 +26,7 @@ const ShelterList = ({ shelters }) => {
   return (
     <div>
       <h2>Available Animal Adoption Shelters</h2>
-      {shelters.length > 0 ? (
+      {(shelters && shelters.length > 0) ? (
         <Container>
           {shelters.map((shelter, index) => (
             <DivBox key={index}>
