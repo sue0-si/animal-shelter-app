@@ -64,10 +64,10 @@ export const fetchByZipCode = async (zipCode, type, distance) => {
             },
         });
         if (distance != null){
-          const filteredData = response.data.filter((item) => item.distance <= distance);
+          const filteredData = response.data[type].filter((item) => item.distance <= distance);
           return filteredData;
         } else {
-          return response.data;
+          return response.data[type];
         }
     } catch (error) {
         console.error("Error fetching shelters:", error);

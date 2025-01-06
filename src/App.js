@@ -13,8 +13,9 @@ function App() {
   const handleZipCodeSubmit = async (code) => {
     setZipCode(code);
     const fetchedShelters = await fetchByZipCode(code, 'organizations', distance);
+    console.log('fetched shelters:', fetchedShelters);
     localStorage.setItem('shelters', JSON.stringify(fetchedShelters.organizations));
-    setShelters(fetchedShelters.organizations);
+    setShelters(fetchedShelters);
   };
 
   const handleDistanceChange = async (dist) => {

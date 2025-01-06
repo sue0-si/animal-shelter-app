@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 const ShelterList = ({ shelters }) => {
   const formatAddress = (address) => {
     const nullCheck = (value) => value == null ? "" : (value + ",");
@@ -12,16 +14,16 @@ const ShelterList = ({ shelters }) => {
     <div>
       <h2>Available Animal Adoption Shelters</h2>
       {shelters.length > 0 ? (
-        <ul>
+        <div>
           {shelters.map((shelter, index) => (
-            <li key={index}>
+            <div key={index}>
               <h3>{shelter.name}</h3>
               <p>{formatAddress(shelter.address)}</p>
               <p>{shelter.phone}</p>
               <EmailLink email={shelter.email}/>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No shelters found for the provided zip code.</p>
       )}
