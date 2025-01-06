@@ -10,16 +10,15 @@ function App() {
     const [zipCode, setZipCode] = useState("");
     const [shelters, setShelters] = useState([]);
     const [cats, setCats] = useState([]);
-  const [distance, setDistance] = useState('');
+    const [distance, setDistance] = useState('5');
 
     const handleZipCodeSubmit = async (code) => {
         setZipCode(code);
         const fetchedShelters = await fetchByZipCode(code, "organizations", distance);
-    console.log('fetched shelters:', fetchedShelters);
-        console.log(fetchedShelters);
+        console.log('fetched shelters:', fetchedShelters);
         setShelters(fetchedShelters);
-        const fetchedCats = await fetchByZipCode(code, "animals");
-        setCats(fetchedCats.animals);
+        const fetchedCats = await fetchByZipCode(code, "animals", distance);
+        setCats(fetchedCats);
   };
 
   const handleDistanceChange = async (dist) => {
