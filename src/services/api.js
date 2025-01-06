@@ -54,18 +54,41 @@ export const fetchByZipCode = async (zipCode, type) => {
         if (token === null) {
             throw new Error("No OAuth token was returned");
         }
-
-        const response = await axios.get(`${API_BASE_URL}/${type}`, {
-            params: {
-                location: zipCode,
-            },
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        let lookup_key = JSON.stringify({type, zipCode});
+        if (localStorage.getItem(lookup_key)) {
+            return JSON.parse(localStorage.getItem(lookup_key));
+        }
+        let response;
+        switch (type) {
+            case "organizations":
+                response = await axios.get(`${API_BASE_URL}/${type}`, {
+                    params: {
+                        location: zipCode,
+                    },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                break;
+            case "animals":
+                response = await axios.get(`${API_BASE_URL}/${type}`, {
+                    params: {
+                        location: zipCode,
+                        type: "cat",
+                    },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                break;
+            default:
+                throw new Error("Invalid type provided");
+        }
+        localStorage.setItem(lookup_key, JSON.stringify(response.data));
+        console.log(response);
         return response.data;
     } catch (error) {
         console.error("Error fetching shelters:", error);
-        throw error;
+        return {organizations: []};
     }
 };

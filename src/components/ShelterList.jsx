@@ -11,7 +11,7 @@ const ShelterList = ({ shelters }) => {
   return (
     <div>
       <h2>Available Animal Adoption Shelters</h2>
-      {shelters.length > 0 ? (
+      {(shelters && shelters.length > 0) ? (
         <ul>
           {shelters.map((shelter, index) => (
             <li key={index}>
