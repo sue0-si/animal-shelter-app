@@ -1,6 +1,7 @@
 import React from 'react';
 
 const CatList = ({ cats }) => {
+    // console.log("cats in catlist.jsx", cats);
     if (!cats || cats.length === 0) {
         return <div>
             <h2>Available Cats for Adoption</h2>
