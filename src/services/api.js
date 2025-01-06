@@ -45,7 +45,7 @@ const getOAuthToken = async () => {
 
 const valid_types = ["organizations", "animals"];
 
-export const fetchByZipCode = async (zipCode, type) => {
+export const fetchByZipCode = async (zipCode, type, distance) => {
     try {
         if (!valid_types.includes(type)) {
             throw new Error("Invalid type provided");
@@ -63,7 +63,12 @@ export const fetchByZipCode = async (zipCode, type) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return response.data;
+        if (distance != null){
+          const filteredData = response.data.filter((item) => item.distance <= distance);
+          return filteredData;
+        } else {
+          return response.data;
+        }
     } catch (error) {
         console.error("Error fetching shelters:", error);
         throw error;
