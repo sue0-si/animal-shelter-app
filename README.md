@@ -33,7 +33,7 @@ animal-shelter-app
 
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone git@github.com:sue0-si/animal-shelter-app.git
    ```
 2. Navigate to the project directory:
    ```
